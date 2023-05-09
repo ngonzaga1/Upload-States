@@ -2,11 +2,31 @@ import pandas as pd
 import tabulate
 import xlrd
 import openpyxl
+import argparse
 from Tools.scripts.dutree import display
+from xlrd import open_workbook, XLRDError
 
+def file_path(string):
+    if os.path.isfile(string):
+        return string
+    else:
+        raise FileNotFoundError(string)
+
+def dest_path(string):
+    if os.path.isfile(string):
+        return string
+    else:
+        raise FileNotFoundError(string)
+
+ap = argparse.ArgumentParser()
+ap.add_argument('--f_path', type=file_path, help="File Location for Upload")
+ap.add_argument('--d_path', type=dest_path, help="Destination File Location for Upload")
+args = vars(ap.parse_args())
+
+fileloc = args['f_path']
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # INSERT FIlE LOCATION HERE
-file_loc = r'C:\wip\som\rick\ne\InstructionForApril2023\2022 Petroleum Mktrs Report WORK FILE.xlsx'
+file_loc = fileloc
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Column names
@@ -47,7 +67,8 @@ left_aligned_df = result1.reset_index(drop=True).style.set_properties(**{'text-a
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # INSERT THE DESTINATION PATH HERE
 #       The path which will upload the data frame to the text file - nebraska.txt
-path = r'C:\wip\som\rick\ne\InstructionForApril2023\data\nebraska4.txt'
+fileloc1 = args['d_path']
+path = fileloc1
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
