@@ -45,11 +45,14 @@ left_aligned_df = result1.reset_index(drop=True).style.set_properties(**{'text-a
 # The path which will upload the data frame to the text file - nebraska.txt
 # fileloc1 = args['d_path']
 # path = fileloc1
-path = r"C:\wip\som\rick\ne\ne1.txt"
+# path = r"C:\wip\som\rick\ne\ne1.txt"
+destloc = args['d_path']
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # export DataFrame to text file
-with open(path, 'w') as f:
+file_path = os.path.join(destloc, 'NE.txt')
+
+with open(file_path, 'w') as f:
      left_aligned_df_string = left_aligned_df.hide(axis="index").to_string(sparse_index=True, delimiter='\t')
      f.write(left_aligned_df_string)
      print("Export Complete!")
