@@ -40,14 +40,12 @@ result2
 left_aligned_df = result2.reset_index(drop=True).style.set_properties(**{'text-align': 'left'})
 left_aligned_df
 
-
-# The path which will upload the data frame to the text file - ohio1.txt
-path = r'C:\wip\som\rick\OH\ohio.txt'
-
+destloc = args['d_path']
+# export DataFrame to text file
+file_path = os.path.join(destloc, 'OH.txt')
 
 # export DataFrame to text file
-with open(path, 'a') as f:
+with open(file_path, 'w') as f:
     left_aligned_df_string = left_aligned_df.hide(axis="index").hide(axis=1).to_string(sparse_columns=True, sparse_index=True, delimiter='\t')
     f.write(left_aligned_df_string)
     print("Export Complete!")
-

@@ -87,15 +87,8 @@ merged3
 left_aligned_df = merged3.reset_index(drop=True).style.set_properties(**{'text-align': 'left'})
 left_aligned_df
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# The path which will upload the data frame to the text file
-
-# Create a text file name - for example: Alabama0423.txt
-# Insert the path location of where you want the exported file to appear,
-#       and then add your text file name at the end
 destloc = args['d_path']
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# export DataFrame to text file
+
 file_path = os.path.join(destloc, 'AL.txt')
 
 # export DataFrame to text file

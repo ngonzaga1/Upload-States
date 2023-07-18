@@ -3,6 +3,7 @@ import numpy as np
 import tabulate
 import xlrd
 import openpyxl
+import os
 from Tools.scripts.dutree import display
 import argparse
 
@@ -36,11 +37,13 @@ ks3 =ks2[['county', 'licnum', 'CompanyName', 'State', 'id', 'Taxable glns']]
 left_aligned_df = ks3.reset_index(drop=True).style.set_properties(**{'text-align': 'left'})
 left_aligned_df
 
-# The path which will upload the data frame to the text file - ohio1.txt
-path = r'C:\wip\som\rick\KS\kansas.txt'
+destloc = args['d_path']
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # export DataFrame to text file
-with open(path, 'a') as f:
-    left_aligned_df_string = left_aligned_df.hide(axis="index").hide(axis=1).to_string(sparse_columns=True, sparse_index=True, delimiter='\t')
-    f.write(left_aligned_df_string)
-    print("Export Complete!")
+file_path = os.path.join(destloc, 'KS.txt')
+
+with open(file_path, 'w') as f:
+     left_aligned_df_string = left_aligned_df.hide(axis="index").to_string(sparse_index=True, delimiter='\t')
+     f.write(left_aligned_df_string)
+     print("Export Complete!")
